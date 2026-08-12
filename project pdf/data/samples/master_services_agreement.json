@@ -1,0 +1,57 @@
+{
+  "id": "doc_msa_001",
+  "title": "Master Services Agreement (MSA) - Enterprise Software",
+  "category": "Legal Contract",
+  "upload_date": "2026-08-10",
+  "file_size": "2.4 MB",
+  "pages": 6,
+  "summary": "Enterprise Master Services Agreement governing software implementation, licensing, SLAs, and liability terms between Apex Cloud Solutions Inc. and Global Tech Corp.",
+  "clauses": [
+    {
+      "id": "c1",
+      "title": "Clause 1. Scope of Services & Deliverables",
+      "category": "Scope",
+      "risk_level": "LOW",
+      "page": 1,
+      "text": "1.1 Provider agrees to perform cloud implementation services as detailed in Statement of Work ('SOW') #104. All deliverables shall conform to specifications set forth in Exhibit A.",
+      "analysis": "Standard scope clause defining SOW relationship. Low legal exposure."
+    },
+    {
+      "id": "c2",
+      "title": "Clause 4. Payment Terms & Auto-Escalation",
+      "category": "Payment",
+      "risk_level": "MEDIUM",
+      "page": 2,
+      "text": "4.2 Client shall pay all invoices within Net 30 days of receipt. Invoices overdue by 15+ days shall incur late fee interest of 1.5% per month (18% per annum). Provider reserves the right to increase annual subscription fees by up to 12% upon renewal without prior written notice.",
+      "analysis": "Unilateral 12% fee increase upon renewal without notification window. Recommend adding mandatory 60-day notice clause."
+    },
+    {
+      "id": "c3",
+      "title": "Clause 8. Limitation of Liability (Uncapped)",
+      "category": "Liability",
+      "risk_level": "HIGH",
+      "page": 4,
+      "text": "8.1 NEITHER PARTY SHALL BE LIABLE FOR INDIRECT OR CONSEQUENTIAL DAMAGES. HOWEVER, PROVIDER'S TOTAL AGGREGATE LIABILITY FOR DATA BREACHES, IP INFRINGEMENT, OR GROSS NEGLIGENCE SHALL BE UNLIMITED AND NOT SUBJECT TO FEES PAID IN THE PRIOR 12 MONTHS.",
+      "analysis": "HIGH RISK: Uncapped liability exposure for data breaches and IP claims. standard industry caps are 1x-3x annual contract value."
+    },
+    {
+      "id": "c4",
+      "title": "Clause 11. Indemnification",
+      "category": "Indemnification",
+      "risk_level": "HIGH",
+      "page": 5,
+      "text": "11.2 Client agrees to defend, indemnify, and hold harmless Provider against any third-party claims, losses, or legal fees arising out of Client's use of the software, regardless of Provider fault.",
+      "analysis": "HIGH RISK: One-sided indemnification requirement holding client responsible even if Provider is at fault. Must negotiate mutual indemnification."
+    },
+    {
+      "id": "c5",
+      "title": "Clause 14. Term, Termination & Auto-Renewal",
+      "category": "Termination",
+      "risk_level": "MEDIUM",
+      "page": 6,
+      "text": "14.1 This Agreement automatically renews for successive 12-month periods unless written notice of non-renewal is provided at least 90 days prior to expiration.",
+      "analysis": "Long 90-day non-renewal notice period with automatic 12-month lock-in. Recommend calendar alerts at 120 days."
+    }
+  ],
+  "raw_text": "MASTER SERVICES AGREEMENT\n\nThis Master Services Agreement ('Agreement') is entered into as of January 15, 2026 by Apex Cloud Solutions Inc. ('Provider') and Global Tech Corp ('Client').\n\nClause 1. Scope of Services & Deliverables\n1.1 Provider agrees to perform cloud implementation services as detailed in Statement of Work ('SOW') #104. All deliverables shall conform to specifications set forth in Exhibit A.\n\nClause 2. Confidentiality & Non-Disclosure\n2.1 Each party agrees to protect the Confidential Information of the other party with the same degree of care it uses for its own proprietary data.\n\nClause 4. Payment Terms & Auto-Escalation\n4.2 Client shall pay all invoices within Net 30 days of receipt. Invoices overdue by 15+ days shall incur late fee interest of 1.5% per month (18% per annum). Provider reserves the right to increase annual subscription fees by up to 12% upon renewal without prior written notice.\n\nClause 8. Limitation of Liability (Uncapped)\n8.1 NEITHER PARTY SHALL BE LIABLE FOR INDIRECT OR CONSEQUENTIAL DAMAGES. HOWEVER, PROVIDER'S TOTAL AGGREGATE LIABILITY FOR DATA BREACHES, IP INFRINGEMENT, OR GROSS NEGLIGENCE SHALL BE UNLIMITED AND NOT SUBJECT TO FEES PAID IN THE PRIOR 12 MONTHS.\n\nClause 11. Indemnification\n11.2 Client agrees to defend, indemnify, and hold harmless Provider against any third-party claims, losses, or legal fees arising out of Client's use of the software, regardless of Provider fault.\n\nClause 14. Term, Termination & Auto-Renewal\n14.1 This Agreement automatically renews for successive 12-month periods unless written notice of non-renewal is provided at least 90 days prior to expiration."
+}

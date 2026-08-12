@@ -1,0 +1,39 @@
+{
+  "id": "doc_rag_paper_002",
+  "title": "Dense Retrieval & Vector Hybrid Embeddings in RAG Architectures",
+  "category": "Research Paper",
+  "upload_date": "2026-08-11",
+  "file_size": "4.1 MB",
+  "pages": 12,
+  "summary": "Academic research paper evaluating dense vector embeddings, pgvector HNSW indexing, reciprocal rank fusion (RRF), and context window retrieval efficiency in LLM systems.",
+  "clauses": [
+    {
+      "id": "p1",
+      "title": "Section 1. Abstract & Introduction",
+      "category": "Architecture",
+      "risk_level": "LOW",
+      "page": 1,
+      "text": "Retrieval Augmented Generation (RAG) bridges external knowledge bases with Large Language Models. We evaluate pgvector with HNSW indexing against traditional BM25 keyword search on 50,000 legal contracts.",
+      "analysis": "Introduction detailing hybrid dense/sparse vector retrieval methodologies."
+    },
+    {
+      "id": "p2",
+      "title": "Section 3. Vector Embeddings & pgvector Cosine Metrics",
+      "category": "Vector DB",
+      "risk_level": "LOW",
+      "page": 4,
+      "text": "Vector distance calculations utilize Cosine Distance (1 - cos(theta)) and L2 distance (||u - v||_2). HNSW indexing achieves 98.2% recall with sub-12ms latency under 1536-dimensional OpenAI / Gemini embeddings.",
+      "analysis": "Technical benchmarking of pgvector index types and embedding dimensionalities."
+    },
+    {
+      "id": "p3",
+      "title": "Section 5. Chunking Strategies & Context Poisoning",
+      "category": "Performance",
+      "risk_level": "MEDIUM",
+      "page": 7,
+      "text": "Fixed-size chunking (500 tokens, 50 token overlap) exhibits a 14% context fragmentation rate on multi-page legal clauses. Dynamic semantic chunking by section boundary improves precision by 31%.",
+      "analysis": "Highlights key vulnerability in naive chunking strategies for dense contracts."
+    }
+  ],
+  "raw_text": "DENSE RETRIEVAL & VECTOR HYBRID EMBEDDINGS IN RAG ARCHITECTURES\n\nSection 1. Abstract & Introduction\nRetrieval Augmented Generation (RAG) bridges external knowledge bases with Large Language Models. We evaluate pgvector with HNSW indexing against traditional BM25 keyword search on 50,000 legal contracts.\n\nSection 3. Vector Embeddings & pgvector Cosine Metrics\nVector distance calculations utilize Cosine Distance (1 - cos(theta)) and L2 distance (||u - v||_2). HNSW indexing achieves 98.2% recall with sub-12ms latency under 1536-dimensional OpenAI / Gemini embeddings.\n\nSection 5. Chunking Strategies & Context Poisoning\nFixed-size chunking (500 tokens, 50 token overlap) exhibits a 14% context fragmentation rate on multi-page legal clauses. Dynamic semantic chunking by section boundary improves precision by 31%."
+}

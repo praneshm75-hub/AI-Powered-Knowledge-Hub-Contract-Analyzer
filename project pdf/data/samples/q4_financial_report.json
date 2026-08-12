@@ -1,0 +1,30 @@
+{
+  "id": "doc_fin_report_003",
+  "title": "Q4 2025 Annual Financial Report & Audit Disclosures",
+  "category": "Financial Report",
+  "upload_date": "2026-08-09",
+  "file_size": "5.8 MB",
+  "pages": 24,
+  "summary": "Audited Q4 financial performance report covering revenue growth, EBITDA margins, balance sheet debt covenants, and forward-looking risk factors.",
+  "clauses": [
+    {
+      "id": "f1",
+      "title": "Item 1. Revenue & Segment Performance",
+      "category": "Financials",
+      "risk_level": "LOW",
+      "page": 3,
+      "text": "Total consolidated revenue for FY2025 reached $142.8M, representing a 28% Year-over-Year (YoY) increase. Recurring SaaS revenue comprised 84% of total top-line revenue.",
+      "analysis": "Strong top-line SaaS growth metrics."
+    },
+    {
+      "id": "f2",
+      "title": "Item 4. Debt Covenants & Liquidity Risk",
+      "category": "Debt",
+      "risk_level": "HIGH",
+      "page": 14,
+      "text": "The Credit Facility requires maintaining a minimum Net Debt to EBITDA ratio of less than 3.2x. As of Dec 31, 2025, the ratio stood at 3.05x. Failure to meet covenants in Q1 2026 would trigger mandatory debt acceleration.",
+      "analysis": "HIGH RISK: Tight debt covenant cushion (3.05x vs 3.2x limit). Risk of credit default or refinancing penalty if Q1 cash flow decelerates."
+    }
+  ],
+  "raw_text": "Q4 2025 ANNUAL FINANCIAL REPORT & AUDIT DISCLOSURES\n\nItem 1. Revenue & Segment Performance\nTotal consolidated revenue for FY2025 reached $142.8M, representing a 28% Year-over-Year (YoY) increase. Recurring SaaS revenue comprised 84% of total top-line revenue.\n\nItem 4. Debt Covenants & Liquidity Risk\nThe Credit Facility requires maintaining a minimum Net Debt to EBITDA ratio of less than 3.2x. As of Dec 31, 2025, the ratio stood at 3.05x. Failure to meet covenants in Q1 2026 would trigger mandatory debt acceleration."
+}

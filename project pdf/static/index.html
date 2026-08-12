@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClauseMind AI | AI-Powered Knowledge Hub & Contract Analyzer</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-brand">
+            <div class="brand-logo">
+                <i class="fa-solid fa-brain-circuit"></i>
+            </div>
+            <div class="brand-text">
+                <span class="brand-name">ClauseMind <span class="badge-ai">RAG AI</span></span>
+                <span class="brand-tagline">Knowledge Hub & Contract Risk Analyzer</span>
+            </div>
+        </div>
+
+        <div class="nav-status">
+            <div class="status-pill model-pill">
+                <i class="fa-solid fa-microchip text-indigo"></i>
+                <span>Gemini RAG + pgvector</span>
+            </div>
+            <div class="status-pill tier-pill" id="navTierBadge">
+                <i class="fa-solid fa-crown text-amber"></i>
+                <span id="userTierName">Free Tier</span>
+            </div>
+        </div>
+
+        <div class="nav-actions">
+            <button class="btn btn-secondary btn-sm" id="btnOpenVectorViz">
+                <i class="fa-solid fa-diagram-project"></i> Vector Visualizer
+            </button>
+            <button class="btn btn-secondary btn-sm" id="btnOpenWebhooks">
+                <i class="fa-solid fa-terminal"></i> Stripe Webhooks <span class="pulse-dot"></span>
+            </button>
+            <button class="btn btn-primary btn-sm" id="btnOpenUpgrade">
+                <i class="fa-solid fa-bolt"></i> Upgrade Plan
+            </button>
+
+            <!-- User OAuth Profile Menu -->
+            <div class="user-profile-btn" id="userProfileBtn">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" alt="Avatar" id="userAvatar">
+                <div class="user-info-text">
+                    <span class="user-name" id="userName">Alex Mercer</span>
+                    <span class="user-provider" id="userProvider">Google OAuth</span>
+                </div>
+                <i class="fa-solid fa-chevron-down text-muted"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub-Header Metric Ribbon -->
+    <div class="metrics-ribbon">
+        <div class="ribbon-item">
+            <span class="ribbon-label">Active Document:</span>
+            <span class="ribbon-val text-bold" id="activeDocTitle">Master Services Agreement (MSA)</span>
+        </div>
+        <div class="ribbon-item">
+            <span class="ribbon-label">Risk Status:</span>
+            <span class="badge badge-risk-high" id="activeRiskBadge"><i class="fa-solid fa-triangle-exclamation"></i> CRITICAL RISK</span>
+        </div>
+        <div class="ribbon-item">
+            <span class="ribbon-label">Daily AI Quota:</span>
+            <div class="quota-progress-box">
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill fill-amber" id="queryQuotaFill" style="width: 80%;"></div>
+                </div>
+                <span class="quota-text" id="queryQuotaText">4 / 5 queries</span>
+            </div>
+        </div>
+        <div class="ribbon-item">
+            <span class="ribbon-label">Monthly Uploads:</span>
+            <div class="quota-progress-box">
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill fill-emerald" id="uploadQuotaFill" style="width: 33%;"></div>
+                </div>
+                <span class="quota-text" id="uploadQuotaText">1 / 3 PDFs</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Workspace 3-Column Layout -->
+    <main class="app-layout">
+        
+        <!-- Left Sidebar: Document Hub & Settings -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="section-header">
+                    <h3><i class="fa-solid fa-folder-open text-indigo"></i> Document Hub</h3>
+                    <button class="btn-icon" id="btnRefreshDocs" title="Refresh Documents"><i class="fa-solid fa-arrows-rotate"></i></button>
+                </div>
+                <div class="doc-list" id="docListContainer">
+                    <!-- Dynamic Document Cards -->
+                </div>
+            </div>
+
+            <!-- Upload Dropzone -->
+            <div class="sidebar-section">
+                <div class="upload-dropzone" id="uploadDropzone">
+                    <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                    <p class="upload-title">Drop PDF or Contract Text</p>
+                    <span class="upload-hint">Upload legal agreements, papers, or reports</span>
+                    <input type="file" id="fileInput" accept=".pdf,.txt,.md,.json" style="display: none;">
+                    <button class="btn btn-outline btn-xs mt-2" onclick="document.getElementById('fileInput').click()">Select File</button>
+                </div>
+            </div>
+
+            <!-- Developer Simulation & Auth Controls -->
+            <div class="sidebar-section dev-tools-box">
+                <h4><i class="fa-solid fa-sliders text-emerald"></i> Interactive Test Engine</h4>
+                <div class="sim-actions">
+                    <button class="btn btn-warning btn-block btn-xs" id="btnSimulateRateLimit">
+                        <i class="fa-solid fa-gauge-high"></i> Test HTTP 429 Paywall
+                    </button>
+                </div>
+
+                <div class="oauth-switcher mt-3">
+                    <label class="input-label">Simulate OAuth Login:</label>
+                    <select id="oauthSelect" class="form-select">
+                        <option value="Google OAuth">Google OAuth (Alex Mercer)</option>
+                        <option value="GitHub OAuth">GitHub OAuth (alex-mercer-dev)</option>
+                        <option value="Enterprise Okta SSO">Enterprise Okta SSO (Global Tech Legal)</option>
+                    </select>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Center Workspace: Document Viewer & Clause Risk Radar -->
+        <section class="doc-workspace">
+            <!-- Navigation Tabs -->
+            <div class="workspace-tabs">
+                <button class="tab-btn active" id="tabDocReader" onclick="switchMainTab('reader')">
+                    <i class="fa-solid fa-file-contract"></i> Document Viewer
+                </button>
+                <button class="tab-btn" id="tabRiskRadar" onclick="switchMainTab('radar')">
+                    <i class="fa-solid fa-shield-halved"></i> Contract Risk Radar <span class="tab-badge" id="riskCountBadge">2 High</span>
+                </button>
+                <button class="tab-btn" id="tabVectorViz" onclick="switchMainTab('vector')">
+                    <i class="fa-solid fa-layer-group"></i> pgvector Space
+                </button>
+            </div>
+
+            <!-- Tab 1: Document Reader Panel -->
+            <div class="tab-content active" id="viewDocReader">
+                <div class="reader-toolbar">
+                    <div class="doc-meta-info">
+                        <span id="docMetaCategory"><i class="fa-solid fa-tag"></i> Legal Contract</span>
+                        <span id="docMetaPages"><i class="fa-solid fa-file-lines"></i> 6 Pages</span>
+                        <span id="docMetaSize"><i class="fa-solid fa-hard-drive"></i> 2.4 MB</span>
+                    </div>
+                    <div class="search-box-sm">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="readerSearchInput" placeholder="Filter clauses...">
+                    </div>
+                </div>
+
+                <div class="document-content-area" id="docViewerText">
+                    <!-- Dynamic Document Pages & Clauses Render Here -->
+                </div>
+            </div>
+
+            <!-- Tab 2: Contract Clause Risk Radar -->
+            <div class="tab-content" id="viewRiskRadar">
+                <div class="risk-summary-card">
+                    <div class="risk-score-circle" id="riskScoreCircle">
+                        <span class="score-num" id="riskScoreNum">40</span>
+                        <span class="score-label">Health Score</span>
+                    </div>
+                    <div class="risk-summary-text">
+                        <h3 id="riskSummaryTitle">Contract Risk Audit: High Exposure Detected</h3>
+                        <p id="riskSummaryDesc">Found 2 High Risk clauses (Uncapped Liability, Unilateral Indemnification) and 2 Medium Risk provisions.</p>
+                        <div class="risk-pills">
+                            <span class="pill pill-red" id="cntHighRisk"><i class="fa-solid fa-circle-exclamation"></i> 2 High Risk</span>
+                            <span class="pill pill-amber" id="cntMedRisk"><i class="fa-solid fa-triangle-exclamation"></i> 2 Medium Risk</span>
+                            <span class="pill pill-emerald" id="cntLowRisk"><i class="fa-solid fa-circle-check"></i> 1 Low Risk</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clause-analysis-list" id="clauseAnalysisContainer">
+                    <!-- Dynamic Clause Risk Cards -->
+                </div>
+            </div>
+
+            <!-- Tab 3: pgvector Vector Distance Visualizer -->
+            <div class="tab-content" id="viewVectorViz">
+                <div class="vector-viz-header">
+                    <h3><i class="fa-solid fa-diagram-project text-indigo"></i> pgvector Similarity & Distance Engine</h3>
+                    <p>Visualizing cosine distance <code>1 - cos(&theta;)</code> and vector embedding matches across parsed document chunks.</p>
+                </div>
+                
+                <div class="vector-viz-body" id="vectorVizContent">
+                    <!-- Vector Matches & Chunk Embeddings Render Here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Workspace: RAG Streaming AI Chat Assistant -->
+        <aside class="chat-workspace">
+            <div class="chat-header">
+                <div class="chat-header-title">
+                    <i class="fa-solid fa-wand-magic-sparkles text-indigo"></i>
+                    <div>
+                        <h3>Contract AI Assistant</h3>
+                        <span class="chat-subtitle">Vector Retrieval Augmented Generation</span>
+                    </div>
+                </div>
+                <button class="btn-icon" id="btnClearChat" title="Clear Chat"><i class="fa-solid fa-trash-can"></i></button>
+            </div>
+
+            <!-- Suggested Quick Prompts -->
+            <div class="suggested-prompts-bar" id="suggestedPrompts">
+                <button class="chip-prompt" onclick="sendQuickPrompt('What is the limitation of liability?')">
+                    <i class="fa-solid fa-shield-cat"></i> Liability Cap?
+                </button>
+                <button class="chip-prompt" onclick="sendQuickPrompt('Check auto-renewal and cancellation terms')">
+                    <i class="fa-solid fa-clock-rotate-left"></i> Auto-Renewal?
+                </button>
+                <button class="chip-prompt" onclick="sendQuickPrompt('Are there annual price fee escalation increases?')">
+                    <i class="fa-solid fa-arrow-trend-up"></i> Price Increases?
+                </button>
+                <button class="chip-prompt" onclick="sendQuickPrompt('Summarize key risks in this document')">
+                    <i class="fa-solid fa-list-check"></i> Risk Summary
+                </button>
+            </div>
+
+            <!-- Chat Conversation History -->
+            <div class="chat-messages" id="chatMessages">
+                <div class="message msg-ai">
+                    <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
+                    <div class="msg-content">
+                        <p>Hello Alex! I am your <strong>ClauseMind RAG Assistant</strong>. I have indexed <strong>Master Services Agreement (MSA)</strong> into the pgvector embedding store.</p>
+                        <p>Ask me anything about liability caps, auto-renewal windows, indemnification, or financial covenants.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Input Bar -->
+            <div class="chat-input-container">
+                <div class="chat-input-wrapper">
+                    <textarea id="chatInput" placeholder="Ask a question about this document..." rows="1"></textarea>
+                    <button class="btn-send" id="btnSendChat">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="chat-footer-info">
+                    <span><i class="fa-solid fa-bolt text-indigo"></i> Token-by-token streaming RAG</span>
+                    <span id="chatQueryRemaining">1 Query left on Free Tier</span>
+                </div>
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- Modal 1: Stripe Checkout & Subscription Upgrade Drawer -->
+    <div class="modal-overlay" id="modalUpgrade">
+        <div class="modal-card drawer-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-crown text-amber"></i> Upgrade Subscription Tier</h3>
+                <button class="btn-close" onclick="closeModal('modalUpgrade')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-muted">Unlock unlimited RAG questions, dense pgvector indexing, and automated clause risk analysis.</p>
+
+                <!-- Tier Pricing Grid -->
+                <div class="pricing-grid">
+                    <div class="pricing-card" id="cardTierFree">
+                        <div class="tier-name">Free</div>
+                        <div class="tier-price">$0 <span>/mo</span></div>
+                        <ul class="tier-features">
+                            <li><i class="fa-solid fa-check text-emerald"></i> 10 PDF Uploads / month</li>
+                            <li><i class="fa-solid fa-check text-emerald"></i> 50 AI Questions / day</li>
+                            <li><i class="fa-solid fa-check text-emerald"></i> Max 50 pages per doc</li>
+                            <li><i class="fa-solid fa-check text-emerald"></i> Clause Risk Radar Audit</li>
+                        </ul>
+                        <button class="btn btn-outline btn-block mt-3" disabled>Current Plan</button>
+                    </div>
+
+                    <div class="pricing-card featured" id="cardTierPro">
+                        <div class="popular-tag">MOST POPULAR</div>
+                        <div class="tier-name">Pro</div>
+                        <div class="tier-price">$29 <span>/mo</span></div>
+                        <ul class="tier-features">
+                            <li><i class="fa-solid fa-check text-emerald"></i> 50 PDF Uploads / month</li>
+                            <li><i class="fa-solid fa-check text-emerald"></i> Unlimited AI Questions</li>
+                            <li><i class="fa-solid fa-check text-emerald"></i> Max 200 pages per doc</li>
+                            <li><i class="fa-solid fa-check text-emerald"></i> Clause Risk Radar Audit</li>
+                        </ul>
+                        <button class="btn btn-primary btn-block mt-3" onclick="selectTierForCheckout('PRO')">Select Pro</button>
+                    </div>
+
+                    <div class="pricing-card" id="cardTierEnterprise">
+                        <div class="tier-name">Enterprise</div>
+                        <div class="tier-price">$199 <span>/mo</span></div>
+                        <ul class="tier-features">
+                            <li><i class="fa-solid fa-check text-emerald"></i> Unlimited PDF Uploads</li>
+                            <li><i class="fa-solid fa-check text-emerald"></i> Dedicated pgvector DB</li>
+                            <li><i class="fa-solid fa-check text-emerald"></i> Stripe Webhooks & API Keys</li>
+                            <li><i class="fa-solid fa-check text-emerald"></i> Multi-seat SSO Auth</li>
+                        </ul>
+                        <button class="btn btn-outline btn-block mt-3" onclick="selectTierForCheckout('ENTERPRISE')">Select Enterprise</button>
+                    </div>
+                </div>
+
+                <!-- Stripe Checkout Form Simulation -->
+                <div class="checkout-form-box mt-4" id="checkoutFormArea">
+                    <h4><i class="fa-solid fa-credit-card text-indigo"></i> Stripe Payment Simulation</h4>
+                    <div class="form-group mt-2">
+                        <label class="input-label">Cardholder Name</label>
+                        <input type="text" class="form-control" id="cardName" value="Alex Mercer">
+                    </div>
+                    <div class="form-row mt-2">
+                        <div class="form-group flex-2">
+                            <label class="input-label">Card Number</label>
+                            <input type="text" class="form-control" id="cardNumber" value="4242 •••• •••• 4242">
+                        </div>
+                        <div class="form-group flex-1">
+                            <label class="input-label">Exp Date</label>
+                            <input type="text" class="form-control" value="12/28">
+                        </div>
+                        <div class="form-group flex-1">
+                            <label class="input-label">CVC</label>
+                            <input type="text" class="form-control" value="888">
+                        </div>
+                    </div>
+
+                    <button class="btn btn-success btn-block btn-lg mt-3" id="btnCompletePayment">
+                        <i class="fa-solid fa-lock"></i> Pay & Upgrade Tier Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: HTTP 429 Rate Limit Paywall Alert Modal -->
+    <div class="modal-overlay" id="modalRateLimit">
+        <div class="modal-card alert-modal">
+            <div class="paywall-icon-box">
+                <i class="fa-solid fa-triangle-exclamation text-amber"></i>
+            </div>
+            <h2>Usage Quota Reached (HTTP 429)</h2>
+            <p>You have reached the daily limit of 5 AI questions for the <strong>Free Tier</strong>.</p>
+            
+            <div class="rate-limit-timer-box">
+                <span>Quota resets in:</span>
+                <div class="timer-countdown" id="rateLimitTimer">00:45</div>
+            </div>
+
+            <div class="modal-actions mt-4">
+                <button class="btn btn-secondary" onclick="closeModal('modalRateLimit')">Dismiss</button>
+                <button class="btn btn-primary" onclick="closeModal('modalRateLimit'); openModal('modalUpgrade')">
+                    <i class="fa-solid fa-crown"></i> Upgrade to Pro for Unlimited
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Stripe Webhook Live Terminal Modal -->
+    <div class="modal-overlay" id="modalWebhooks">
+        <div class="modal-card terminal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-terminal text-emerald"></i> Stripe Payment Webhook Live Feed</h3>
+                <div>
+                    <button class="btn btn-xs btn-outline" id="btnSimulateCustomWebhook"><i class="fa-solid fa-play"></i> Trigger Test Event</button>
+                    <button class="btn-close" onclick="closeModal('modalWebhooks')"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <div class="modal-body p-0">
+                <div class="terminal-container" id="webhookTerminal">
+                    <!-- Webhook JSON logs render here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script src="app.js"></script>
+</body>
+</html>
